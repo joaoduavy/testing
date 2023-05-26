@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+
+package load_test_api;
+
+option go_package = "git.topfreegames.com/ring/app/game-services-and-analytics/backend/load-test-api/internal/protogen/load-test-api";
+
+// Expected response when calling the endpoint.
+message VersionResponse {
+    // The version value
+    string value = 1;
+}
+
+// Service to expose endpoints related to the app version.
+service VersionService {
+    // Returns the current app version.
+    rpc Version(google.protobuf.Empty) returns (VersionResponse) {
+        option (google.api.http) = {
+          get: "/api/version"
+        };
+    }
+
+}

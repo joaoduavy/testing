@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+
+package load_test_api;
+
+option go_package = "git.topfreegames.com/ring/app/game-services-and-analytics/backend/load-test-api/internal/protogen/load-test-api";
+
+message ConfigRequest { 
+    string tag = 1;
+    bytes replayConfig = 2;
+    bytes recordedMessages = 3;
+    int64 bots = 4;
+}
+
+message ConfigResponse {
+    string value = 1;
+}
+
+service ConfigService {
+    rpc ConfigBots(ConfigRequest) returns (ConfigResponse)  {
+        option (google.api.http) = {
+          get: "/api/configBots"
+        };
+    }
+}
